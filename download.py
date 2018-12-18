@@ -1,3 +1,4 @@
+import requests
 # download.py takes a Sermon Audio mp3 ID and saves it to the specified
 # directory.
 
@@ -15,5 +16,14 @@ download_url = base_url + sermon_ID + '/' + sermon_ID + '.mp3'
 print("The download url is: ", download_url)
 
 # Download the file
+request = requests.get(download_url)
+
+# Open the file for saving
+filename = 'sermon-' + sermon_ID + '.mp3'
+file_out = open(filename, 'wb')
+file_out.write(r.content)
+
+# Close the file
+file_out.close()
 
 # Save the file
