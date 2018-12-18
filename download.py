@@ -21,7 +21,7 @@ request = requests.get(download_url)
 # Open the file for saving
 filename = 'sermon-' + sermon_ID + '.mp3'
 file_out = open(filename, 'wb')
-file_out.write(r.content)
+file_out.write(request.content)
 
 # Close the file
 file_out.close()
