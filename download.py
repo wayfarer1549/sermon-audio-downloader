@@ -18,6 +18,14 @@ print("The download url is: ", download_url)
 # Download the file
 request = requests.get(download_url)
 
+if 'acceptemail.asp' in request.url:
+	print("Reached form")
+
+	
+else:
+	print("The url is actually: ", request.url)
+
+'''
 # Open the file for saving
 filename = 'sermon-' + sermon_ID + '.mp3'
 file_out = open(filename, 'wb')
@@ -25,5 +33,6 @@ file_out.write(request.content)
 
 # Close the file
 file_out.close()
+'''
 
 # Save the file
