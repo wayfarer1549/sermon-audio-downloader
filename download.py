@@ -16,11 +16,12 @@ download_url = base_url + sermon_ID + '/' + sermon_ID + '.mp3'
 print("The download url is: ", download_url)
 
 # Download the file
-request = requests.get(download_url)
+# Create an initial request to download the file
+initial_request = requests.get(download_url)
 
-if 'acceptemail.asp' in request.url:
+if 'acceptemail.asp' in initial_request.url:
 	print("Reached form")
-	print("The url is: ", request.url)
+	print("The url is: ", initial_request.url)
 
 	# generate a post request to the form to initiate the download
 	form_parameters = {
@@ -33,7 +34,23 @@ if 'acceptemail.asp' in request.url:
 	for parameter, key in form_parameters.items():
 		print(parameter, key)
 
-	#request.post()
+	# Create the second request to get the download
+	download_request = requests.post(initial_request.url, data=form_parameters)
+
+	
+	# Check the received response
+	print(download_request.status_code)
+	#print(download_request.text)
+
+	# Open the file for saving
+	filename = 'sermon-' + sermon_ID + '.mp3'
+	file_out = open(filename, 'wb')
+	file_out.write(download_request.content)
+
+	# Close the file
+	file_out.close()
+	
+
 	
 else:
 	print("The url is actually: ", request.url)
