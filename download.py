@@ -20,15 +20,19 @@ request = requests.get(download_url)
 
 if 'acceptemail.asp' in request.url:
 	print("Reached form")
+	print("The url is: ", request.url)
 
 	# generate a post request to the form to initiate the download
-	form_parameters = {'already_in': 'true',
+	form_parameters = {
+	'already_in': 'true',
 	'cmd': 'download',
 	'data': 'ID=' + sermon_ID + '&session=' + sermon_ID,
 	'SKIP': 'Maybe Later'}
 
 	# verify the form parameters
-	
+	for parameter, key in form_parameters.items():
+		print(parameter, key)
+
 	#request.post()
 	
 else:
